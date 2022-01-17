@@ -8,6 +8,26 @@ type Partner {
     description: String!
 
   }
+  type AuthData{
+    userId: ID!
+    token : String!
+    tokenExpiration : Int!
+    email:String!
+    
+}
+
+type User{
+  _id : ID!
+  email:String!
+  password :String!
+}
+
+input UserInput{
+  email:String!
+  password:String!
+ 
+
+}
   
   input PartnerInput {
     name: String!
@@ -18,6 +38,7 @@ type Partner {
 
 type RootQuery{
     partners : [Partner!]!
+    login(email :String! , password :String! ) : AuthData!
     
     
 }
@@ -26,6 +47,7 @@ type RootMutation{
    createPartner(partnerInput : PartnerInput) :Partner
     deletePartner(partnerId : ID!) : Partner
     editPartner(partnerId : ID! , partnerInput : PartnerInput) : Partner
+    createUser(userInput : UserInput):User
 
 }
 

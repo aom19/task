@@ -14,6 +14,7 @@ module.exports = {
     }
   },
   createPartner: async (args) => {
+    console.log(args);
     const partner = new Partner({
       name: args.partnerInput.name,
       email: args.partnerInput.email,
