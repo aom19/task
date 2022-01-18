@@ -21,7 +21,7 @@ const Home = () => {
   }, []);
 
   const latestPartners = useSelector((state) => state.partners.latestPartners);
-  console.log(latestPartners);
+  
 
   const imgArray = [image1, image2, image3, image4];
   const [state, setState] = useState({ img: 0 });

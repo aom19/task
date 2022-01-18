@@ -12,7 +12,8 @@ export const fetchPartners = () => {
                   _id
                   name,
                   email,
-                  description
+                  description,
+                  partnerImage
                 }
               }
             `,
@@ -46,8 +47,8 @@ export const fetchPartners = () => {
   };
 };
 
-export const createPartner = (email, name, description) => {
-  console.log(email, name, description);
+export const createPartner = (email, name, description, partnerImage) => {
+  console.log(email, name, description, partnerImage);
   return async (dispatch) => {
     const requestBody = {
       query: `
@@ -56,12 +57,14 @@ export const createPartner = (email, name, description) => {
                   name : "${name}",
                   email: "${email}",
                   description: "${description}",
+                  partnerImage: "${partnerImage}",
                 })
                 {
                   _id,
                   name,
                   email,
                   description
+                  partnerImage
                 }
               }
             `,
@@ -90,8 +93,9 @@ export const createPartner = (email, name, description) => {
   };
 };
 
-export const editPartner = (id, name, description, email) => {
+export const editPartner = (id, name, description, email, partnerImage) => {
   return async (dispatch) => {
+    console.log(partnerImage);
     const requestBody = {
       query: `
               mutation { 
@@ -99,12 +103,14 @@ export const editPartner = (id, name, description, email) => {
                   name : "${name}",
                   email: "${email}",
                   description: "${description}",
+                  partnerImage: "${partnerImage}",
                 })
                 {
                   _id,
                   name,
                   email,
                   description
+                  partnerImage
                 }
               }
             `,
@@ -127,6 +133,7 @@ export const editPartner = (id, name, description, email) => {
         name: name,
         description: description,
         email: email,
+        partnerImage: partnerImage,
       };
       dispatch({
         type: EDIT_PARTNERS,
@@ -150,6 +157,7 @@ export const deletePartner = (id) => {
                   name,
                   email,
                   description
+                  partnerImage
                 }
               }
             `,

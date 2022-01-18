@@ -6,6 +6,8 @@ type Partner {
     name: String!
     email: String!
     description: String!
+    partnerImage: String!
+    
 
   }
   type AuthData{
@@ -33,6 +35,7 @@ input UserInput{
     name: String!
     email: String!
     description: String!
+    partnerImage: String!
 
   }
 

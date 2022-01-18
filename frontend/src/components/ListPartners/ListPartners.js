@@ -12,33 +12,47 @@ const ListPartners = ({ latestPartners, onEdit, admin }) => {
 
   const token = useSelector((state) => state.user?.token);
   return (
-    <div>
-      <ul class="list-group ">
+    <div class="container">
+      <div class="row">
         {latestPartners?.map((partner) => (
-          <div
-            class="list-group-item list-group-item-action"
-            style={{ display: "flex", justifyContent: "space-between" }}
-            key={partner._id}
-          >
-            <span>{partner.name}</span>
-            <span>{partner.email}</span>
-            <span>{partner.description}</span>
-            {token && admin && (
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <span
-                  style={{ marginRight: "15px" }}
-                  onClick={onEdit.bind(this, partner?._id)}
-                >
-                  <FontAwesomeIcon icon={faEdit} />
-                </span>
-                <span onClick={() => dispatch(deletePartner(partner._id))}>
-                  <FontAwesomeIcon icon={faTrash} />
-                </span>
+          <li class="col-md-6 col-lg-4 " style={{ listStyle: "none" }}>
+            {console.log(partner)}
+            <div class="car-wrap rounded ">
+              <div
+                class="img rounded d-flex align-items-end"
+                style={{ backgroundImage: `url(${partner?.partnerImage})` }}
+              ></div>
+              <div class="text">
+                <h2 class="mb-0">
+                  <a>{partner.name}</a>
+                </h2>
+                <div class=" mb-3">
+                  <p class="price ml-auto">{partner?.email}</p>
+                  <p class="price ml-auto">{partner?.description}</p>
+                </div>
+
+                {token && admin && (
+                  <p class="d-flex mb-0 d-block">
+                    <button
+                      class="btn btn-danger py-2 mr-1 text-white"
+                      onClick={() => dispatch(deletePartner(partner._id))}
+                    >
+                      Delete
+                    </button>
+
+                    <button
+                      class="btn btn-secondary py-2 ml-1"
+                      onClick={onEdit.bind(this, partner._id)}
+                    >
+                      <span>Edit</span>
+                    </button>
+                  </p>
+                )}
               </div>
-            )}
-          </div>
+            </div>
+          </li>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

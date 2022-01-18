@@ -28,6 +28,7 @@ const Admin = () => {
     name: "",
     email: "",
     description: "",
+    partnerImage: "",
   });
 
   useEffect(async () => {
@@ -49,18 +50,25 @@ const Admin = () => {
     console.log(values);
 
     await dispatch(
-      createPartner(values.name, values.email, values.description)
+      createPartner(
+        values.name,
+        values.email,
+        values.description,
+        values.partnerImage
+      )
     );
   };
   const onEditDetail = (_id) => {
     setEditForm(true);
     const parnterIndex = partners.filter((x) => x._id === _id);
+    
 
     setValues({
       name: parnterIndex[0].name,
       id: _id,
       email: parnterIndex[0].email,
       description: parnterIndex[0].description,
+      partnerImage: parnterIndex[0].partnerImage,
     });
   };
 
@@ -68,7 +76,13 @@ const Admin = () => {
     e.preventDefault();
     console.log(values);
     await dispatch(
-      editPartner(values.id, values.name, values.description, values.email)
+      editPartner(
+        values.id,
+        values.name,
+        values.description,
+        values.email,
+        values.partnerImage
+      )
     );
   };
 
@@ -140,6 +154,21 @@ const Admin = () => {
                   />
                 </div>
               </div>
+              <div className="d-flex">
+                <div className="form-group mr-2">
+                  <label for="" className="label">
+                    Image URL
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Image URL"
+                    name="partnerImage"
+                    value={values.partnerImage}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
               <div className="form-group">
                 <input
                   type="submit"
@@ -201,6 +230,21 @@ const Admin = () => {
                     placeholder="Description"
                     name="description"
                     value={values.description}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+              <div className="d-flex">
+                <div className="form-group mr-2">
+                  <label for="" className="label">
+                    Image URL
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Image URL"
+                    name="partnerImage"
+                    value={values.partnerImage}
                     onChange={handleChange}
                   />
                 </div>

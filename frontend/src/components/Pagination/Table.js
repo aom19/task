@@ -29,6 +29,7 @@ export default ({ partners }) => {
           onPageSizeChange={setPageSize}
         />
         <IntegratedPaging />
+
         <Table />
         <TableHeaderRow />
         <PagingPanel pageSizes={pageSize} />

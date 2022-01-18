@@ -19,6 +19,7 @@ module.exports = {
       name: args.partnerInput.name,
       email: args.partnerInput.email,
       description: args.partnerInput.description,
+      partnerImage: args.partnerInput.partnerImage,
     });
 
     let createdPartner;
@@ -52,6 +53,7 @@ module.exports = {
           name: args.partnerInput.name,
           email: args.partnerInput.email,
           description: args.partnerInput.description,
+          partnerImage: args.partnerInput.partnerImage,
         }
       );
     } catch (err) {

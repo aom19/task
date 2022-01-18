@@ -32,6 +32,7 @@ export default (state = initialState, action) => {
             name: action.partner.name,
             email: action.partner.email,
             description: action.partner.description,
+            partnerImage: action.partner.partnerImage,
           };
         }
         return partner;

@@ -16,6 +16,10 @@ const partnerSchema = new Schema(
       type: String,
       required: true,
     },
+    partnerImage: {
+      type: String,
+      required: true,
+    },
   }
   //   {
   //     //created/updaated field
