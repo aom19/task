@@ -1,9 +1,0 @@
-{
-    "env":{
-        "MONGO_USER": "Anton",
-        "MONGO_PASSWORD":"No4XkJVQILLqJzCc",
-        "MONGO_NAME" :"TASK"
-
-
-    }
-} 
