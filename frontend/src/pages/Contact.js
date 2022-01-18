@@ -1,40 +1,42 @@
-import React from "react";
-import image1 from "../assets/bg_1.jpg";
-import image3 from "../assets/bg_7.jpeg";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
+import image1 from "../assets/bg_1.jpg";
+
+import Table from "../components/Pagination/Table";
 import Section from "../components/Section/Section";
 
+import { createContact } from "../redux/actions/contact";
+
 const Contact = () => {
+  const dispatch = useDispatch();
+
+  const contacts = useSelector((state) => state?.contact.contacts);
+
+  const [values, setValues] = useState({
+    id: "",
+    name: "",
+    email: "",
+    description: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(createContact(values.email, values.name, values.description));
+  };
   return (
     <>
       <div>
         <Section image={image1} page={"Contact"} name={"Contact Us"} />
-        {/* <section
-          class="hero-wrap hero-wrap-2 js-fullheight ftco-degree-bg"
-          style={{
-            backgroundImage: `url(${image3})`,
-            // backgroundSize: "cover",
-            backgroundPosition: "center",
-            // overflow: "hidden",
-            zIndex: -999,
-          }}
-          data-stellar-background-ratio="0.5"
-        >
-          <div class="overlay"></div>
-          <div class="container">
-            <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
-              <div class="col-md-9  pb-5">
-                <p class="breadcrumbs">
-                  <span>
-                    Contact <i class="ion-ios-arrow-forward"></i>
-                  </span>
-                </p>
-                <h1 class="mb-3 bread">Contact Us</h1>
-              </div>
-            </div>
-          </div>
-        </section> */}
-
         <section class="ftco-section contact-section">
           <div class="container">
             <div class="row d-flex mb-5 contact-info">
@@ -85,12 +87,15 @@ const Contact = () => {
                 </div>
               </div>
               <div class="col-md-8 block-9 mb-md-5">
-                <form action="#" class="bg-light p-5 contact-form">
+                <form class="bg-light p-5 contact-form" onSubmit={handleSubmit}>
                   <div className="form-group">
                     <input
                       type="text"
                       className="form-control"
                       placeholder="Your Name"
+                      name="name"
+                      value={values.name}
+                      onChange={handleChange}
                     />
                   </div>
                   <div className="form-group">
@@ -98,15 +103,12 @@ const Contact = () => {
                       type="text"
                       class="form-control"
                       placeholder="Your Email"
+                      name="email"
+                      value={values.email}
+                      onChange={handleChange}
                     />
                   </div>
-                  <div className="form-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Subject"
-                    />
-                  </div>
+
                   <div className="form-group">
                     <textarea
                       name=""
@@ -115,6 +117,9 @@ const Contact = () => {
                       rows="7"
                       className="form-control"
                       placeholder="Message"
+                      name="description"
+                      value={values.description}
+                      onChange={handleChange}
                     ></textarea>
                   </div>
                   <div className="form-group">
@@ -129,8 +134,9 @@ const Contact = () => {
             </div>
           </div>
         </section>
+
+        <Table partners={contacts} />
       </div>
-      {/* <Footer /> */}
     </>
   );
 };

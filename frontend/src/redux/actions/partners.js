@@ -92,7 +92,6 @@ export const createPartner = (email, name, description) => {
 
 export const editPartner = (id, name, description, email) => {
   return async (dispatch) => {
-    console.log(id, name, description, email);
     const requestBody = {
       query: `
               mutation { 
@@ -132,6 +131,44 @@ export const editPartner = (id, name, description, email) => {
       dispatch({
         type: EDIT_PARTNERS,
         partner: editPartner,
+        id: id,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const deletePartner = (id) => {
+  return async (dispatch) => {
+    const requestBody = {
+      query: `
+              mutation { 
+                deletePartner(partnerId : "${id}" )
+                {
+                  _id,
+                  name,
+                  email,
+                  description
+                }
+              }
+            `,
+    };
+    try {
+      const response = await fetch("http://localhost:8000/graphql", {
+        method: "POST",
+        body: JSON.stringify(requestBody),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+      const resData = await response.json();
+
+      dispatch({
+        type: DELETE_PARTNERS,
         id: id,
       });
     } catch (err) {

@@ -16,7 +16,7 @@ export default ({ partners }) => {
   ]);
 
   const [currentPage, setCurrentPage] = useState(0);
-  const [pageSize, setPageSize] = useState(5);
+  const [pageSize, setPageSize] = useState(12);
   const [pageSizes] = useState(12);
 
   return (

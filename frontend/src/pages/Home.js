@@ -74,7 +74,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <ListPartners latestPartners={latestPartners} />
+      <div style={{ margin: "10%" }}>
+        <ListPartners latestPartners={latestPartners} />
+      </div>
     </div>
   );
 };

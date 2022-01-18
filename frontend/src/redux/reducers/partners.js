@@ -36,9 +36,14 @@ export default (state = initialState, action) => {
         }
         return partner;
       });
-      console.log(newPartners);
+
       return {
         partners: newPartners,
+      };
+    case DELETE_PARTNERS:
+      return {
+        ...state,
+        partners: state.partners.filter((partner) => partner._id !== action.id),
       };
   }
   return state;
