@@ -1,14 +1,15 @@
-import React, { Component, useState, useContext } from "react";
-
+import React, { useState, useContext } from "react";
 import { useDispatch } from "react-redux";
 
-// import { login, signup } from "../features/reducers/userSlice";
-import "./Auth.scss";
 
+//utitilites
+import "./Auth.scss";
 import image1 from "../assets/bg_6.jpeg";
 
+//actions
 import * as authActions from "../redux/actions/auth";
 
+//components
 import Section from "../components/Section/Section";
 
 const AuthPage = () => {

@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
+//utilities
 import image1 from "../assets/bg_1.jpg";
 
+//components
 import Table from "../components/Pagination/Table";
 import Section from "../components/Section/Section";
 
+//actions
 import { createContact } from "../redux/actions/contact";
+
+
+
 
 const Contact = () => {
   const dispatch = useDispatch();
