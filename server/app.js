@@ -1,20 +1,22 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const { graphqlHTTP } = require("express-graphql");
-
 const mongoose = require("mongoose");
-
-
-const graphQlSchema = require("./graphql/schema/index");
-const graphQlResolvers = require("./graphql/resolvers/index");
-
-
-require("dotenv").config();
+const cors = require("cors");
 
 const PORT = 8000;
 const app = express();
-
+app.use(cors());
+app.use(express.json());
 app.use(bodyParser.json());
+require("dotenv").config();
+
+app.use(express.static(__dirname + "/public"));
+app.use("/uploads", express.static("uploads"));
+
+//routes
+
+const partnersRoutes = require("./routes/partners");
+const userRoutes = require("./routes/users");
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -27,17 +29,8 @@ app.use((req, res, next) => {
   next();
 });
 
-// app.use(isAuth);
-
-
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    schema: graphQlSchema,
-    rootValue: graphQlResolvers,
-    graphiql: true,
-  })
-);
+app.use("/partners", partnersRoutes);
+app.use("/users", userRoutes);
 
 mongoose
   .connect(

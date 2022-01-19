@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Section from "../components/Section/Section";
 import ListPartners from "../components/ListPartners/ListPartners";
 import Modal from "react-bootstrap/Modal";
+import { useMutation, gql } from "@apollo/client";
 
 //assets
 import image1 from "../assets/bg_6.jpeg";
@@ -28,8 +29,8 @@ const Admin = () => {
     name: "",
     email: "",
     description: "",
-    partnerImage: "",
   });
+  const [partnerImage, setPartnerImage] = useState("");
 
   useEffect(async () => {
     await dispatch(fetchPartners);
@@ -45,43 +46,64 @@ const Admin = () => {
     });
   };
 
+  const handleChangeFile = (e) => {
+    setPartnerImage(e.target.files[0]);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(values);
+
+    const formData = new FormData();
+
+    formData.append("name", values.name);
+    formData.append("email", values.email);
+    formData.append("description", values.description);
+    formData.append("partnerImage", partnerImage);
+
+    
+    console.log(formData);
 
     await dispatch(
       createPartner(
         values.name,
         values.email,
         values.description,
-        values.partnerImage
+        partnerImage,
+        formData
       )
     );
   };
   const onEditDetail = (_id) => {
     setEditForm(true);
     const parnterIndex = partners.filter((x) => x._id === _id);
-    
 
     setValues({
       name: parnterIndex[0].name,
       id: _id,
       email: parnterIndex[0].email,
       description: parnterIndex[0].description,
-      partnerImage: parnterIndex[0].partnerImage,
     });
+    setPartnerImage(parnterIndex[0].partnerImage);
   };
 
   const handleSubmitEdit = async (e) => {
     e.preventDefault();
-    console.log(values);
+
+    const formData = new FormData();
+
+    formData.append("name", values.name);
+    formData.append("email", values.email);
+    formData.append("description", values.description);
+    formData.append("partnerImage", partnerImage);
+
     await dispatch(
       editPartner(
         values.id,
         values.name,
         values.description,
         values.email,
-        values.partnerImage
+        partnerImage,
+        formData
       )
     );
   };
@@ -109,7 +131,11 @@ const Admin = () => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <form className="request-form  bg-primary" onSubmit={handleSubmit}>
+            <form
+              className="request-form  bg-primary"
+              onSubmit={handleSubmit}
+              encType="multipart/form-data"
+            >
               <h2>New Partner</h2>
               <div className="d-flex">
                 <div className="form-group mr-2 ">
@@ -157,15 +183,15 @@ const Admin = () => {
               <div className="d-flex">
                 <div className="form-group mr-2">
                   <label for="" className="label">
-                    Image URL
+                    Image
                   </label>
                   <input
-                    type="text"
+                    type="file"
                     className="form-control"
-                    placeholder="Image URL"
+                    placeholder="Image"
                     name="partnerImage"
                     value={values.partnerImage}
-                    onChange={handleChange}
+                    onChange={handleChangeFile}
                   />
                 </div>
               </div>
@@ -240,12 +266,12 @@ const Admin = () => {
                     Image URL
                   </label>
                   <input
-                    type="text"
+                    type="file"
                     className="form-control"
-                    placeholder="Image URL"
+                    placeholder="Image"
                     name="partnerImage"
                     value={values.partnerImage}
-                    onChange={handleChange}
+                    onChange={handleChangeFile}
                   />
                 </div>
               </div>

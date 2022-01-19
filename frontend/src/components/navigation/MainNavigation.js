@@ -12,7 +12,6 @@ const MainNavigation = (props) => {
   const dispatch = useDispatch();
 
   const token = useSelector((state) => state.user);
- 
 
   return (
     <nav
@@ -58,6 +57,7 @@ const MainNavigation = (props) => {
                 Partners
               </NavLink>
             </li>
+           
 
             {!token?.email ? (
               <li className="nav-item">

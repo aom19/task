@@ -21,8 +21,8 @@ export default (state = initialState, action) => {
     case CREATE_PARTNERS:
       return {
         ...state,
-        partners: state.partners.concat(action.newPartner),
-        latestPartners: state.latestPartners.concat(action.newPartner),
+        partners: state?.partners.concat(action.newPartner),
+        latestPartners: state?.latestPartners.concat(action.newPartner),
       };
     case EDIT_PARTNERS:
       const newPartners = state.partners.map((partner) => {

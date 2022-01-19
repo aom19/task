@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+
 const Schema = mongoose.Schema;
 
 const partnerSchema = new Schema(
@@ -18,13 +19,10 @@ const partnerSchema = new Schema(
     },
     partnerImage: {
       type: String,
-      required: true,
+      required: false,
     },
   }
-  //   {
-  //     //created/updaated field
-  //     timestamps: true,
-  //   }
+ 
 );
 
 module.exports = mongoose.model("Partner", partnerSchema);

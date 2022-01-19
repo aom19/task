@@ -38,8 +38,8 @@ function App() {
             <Route path="/partners" component={Partners} exact />
             <Route path="/contact" component={Contact} exact />
             <Route path="/login" component={AuthPage} exact />
-
-            {token?.token && <Route path="/admin" component={Admin} exact />}
+            <Route path="/admin" component={Admin} exact />
+            {/* {token?.token && <Route path="/admin" component={Admin} exact />} */}
           </Switch>
         </>
       </>

@@ -16,11 +16,12 @@ const ListPartners = ({ latestPartners, onEdit, admin }) => {
       <div class="row">
         {latestPartners?.map((partner) => (
           <li class="col-md-6 col-lg-4 " style={{ listStyle: "none" }}>
-            {console.log(partner)}
             <div class="car-wrap rounded ">
               <div
                 class="img rounded d-flex align-items-end"
-                style={{ backgroundImage: `url(${partner?.partnerImage})` }}
+                style={{
+                  backgroundImage: `url(${`${partner?.partnerImage}`})`,
+                }}
               ></div>
               <div class="text">
                 <h2 class="mb-0">

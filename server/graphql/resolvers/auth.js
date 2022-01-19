@@ -36,6 +36,7 @@ module.exports = {
   },
   // destructuring the object args => ({ email, password })
   login: async ({ email, password }) => {
+    console.log(email, password);
     const user = await User.findOne({ email: email });
 
     if (!user) {

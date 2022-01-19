@@ -1,5 +1,6 @@
 const moongoose = require("mongoose");
 const Partner = require("../../models/partner");
+
 const { transformPartner } = require("./merge");
 
 module.exports = {
@@ -13,13 +14,20 @@ module.exports = {
       throw err;
     }
   },
-  createPartner: async (args) => {
+  createPartner: async (args, { file }) => {
     console.log(args);
+
+    const { createReadStream, filename, mimetype, encoding } = await file;
+    const stream = createReadStream();
+
+    const pathName = path.join(__dirname, `public/images${filename}`);
+    await stream.pipe(fs.createWriteStream(pathName));
+
     const partner = new Partner({
       name: args.partnerInput.name,
       email: args.partnerInput.email,
       description: args.partnerInput.description,
-      partnerImage: args.partnerInput.partnerImage,
+      partnerImage: `http://localhost:4000/images/${filename}`,
     });
 
     let createdPartner;
